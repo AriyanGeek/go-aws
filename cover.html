@@ -1,0 +1,267 @@
+
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+		<title>go-aws: Go Coverage Report</title>
+		<style>
+			body {
+				background: black;
+				color: rgb(80, 80, 80);
+			}
+			body, pre, #legend span {
+				font-family: Menlo, monospace;
+				font-weight: bold;
+			}
+			#topbar {
+				background: black;
+				position: fixed;
+				top: 0; left: 0; right: 0;
+				height: 42px;
+				border-bottom: 1px solid rgb(80, 80, 80);
+			}
+			#content {
+				margin-top: 50px;
+			}
+			#nav, #legend {
+				float: left;
+				margin-left: 10px;
+			}
+			#legend {
+				margin-top: 12px;
+			}
+			#nav {
+				margin-top: 10px;
+			}
+			#legend span {
+				margin: 0 5px;
+			}
+			.cov0 { color: rgb(192, 0, 0) }
+.cov1 { color: rgb(128, 128, 128) }
+.cov2 { color: rgb(116, 140, 131) }
+.cov3 { color: rgb(104, 152, 134) }
+.cov4 { color: rgb(92, 164, 137) }
+.cov5 { color: rgb(80, 176, 140) }
+.cov6 { color: rgb(68, 188, 143) }
+.cov7 { color: rgb(56, 200, 146) }
+.cov8 { color: rgb(44, 212, 149) }
+.cov9 { color: rgb(32, 224, 152) }
+.cov10 { color: rgb(20, 236, 155) }
+
+		</style>
+	</head>
+	<body>
+		<div id="topbar">
+			<div id="nav">
+				<select id="files">
+				
+				<option value="file0">go-aws/main.go (91.0%)</option>
+				
+				</select>
+			</div>
+			<div id="legend">
+				<span>not tracked</span>
+			
+				<span class="cov0">not covered</span>
+				<span class="cov8">covered</span>
+			
+			</div>
+		</div>
+		<div id="content">
+		
+		<pre class="file" id="file0" style="display: none">package main
+
+import (
+        "encoding/json"
+        "errors"
+        "fmt"
+
+        "github.com/aws/aws-lambda-go/events"
+        "github.com/aws/aws-lambda-go/lambda"
+        "github.com/aws/aws-sdk-go/aws"
+        "github.com/aws/aws-sdk-go/aws/session"
+        "github.com/aws/aws-sdk-go/service/dynamodb"
+        "github.com/aws/aws-sdk-go/service/dynamodb/dynamodbattribute"
+        "github.com/aws/aws-sdk-go/service/dynamodb/dynamodbiface"
+)
+type Device struct {
+                Id string `json:"id"`
+                DeviceModel string `json:"deviceModel"`
+                Name string `json:"name"`
+                Note string `json:"note"`
+                Serial string `json:"serial"`
+        }
+func Get(svc dynamodbiface.DynamoDBAPI , request events.APIGatewayProxyRequest) (*dynamodb.GetItemOutput, error) <span class="cov8" title="1">{
+        type IdType struct {
+                Id string `json:"id"`
+        }
+        var val = request.PathParameters["id"]
+        id := IdType{Id:val}
+
+        key, err := dynamodbattribute.MarshalMap(id)
+        // if err != nil {
+        //         fmt.Println(err.Error())
+        //         return nil, err
+        // }
+
+        param := &amp;dynamodb.GetItemInput{
+                Key:       key,
+                TableName: aws.String("device"),
+        }
+
+        result, err := svc.GetItem(param)
+
+        if err != nil </span><span class="cov8" title="1">{
+                return nil, err
+        }</span>
+
+        <span class="cov8" title="1">return result, nil</span>
+}
+func Post(svc dynamodbiface.DynamoDBAPI , request events.APIGatewayProxyRequest) (*dynamodb.PutItemOutput, error)<span class="cov8" title="1">{
+        
+        fmt.Println("reqBody:"+request.Body)
+        device := Device{}
+        json.Unmarshal([]byte(request.Body), &amp;device)
+        fmt.Println(device)
+        if device.Id == "" </span><span class="cov8" title="1">{
+                return nil , errors.New("id field is empty")
+        }</span>
+        <span class="cov8" title="1">fmt.Println("pass id")
+        if device.DeviceModel == "" </span><span class="cov8" title="1">{
+                return nil , errors.New("device model field is empty")
+        }</span>
+        <span class="cov8" title="1">fmt.Println("pass dm")
+        if device.Name == "" </span><span class="cov8" title="1">{
+                return nil , errors.New("name field is empty")
+        }</span>
+        <span class="cov8" title="1">fmt.Println("pass name")
+        if device.Note == "" </span><span class="cov8" title="1">{
+                return nil , errors.New("note field is empty")
+        }</span>
+        <span class="cov8" title="1">if device.Serial == "" </span><span class="cov8" title="1">{
+                return nil , errors.New("serial field is empty")
+        }</span>
+        <span class="cov8" title="1">newItem, _ := dynamodbattribute.MarshalMap(device)
+        // if err != nil {
+        //         fmt.Println(err.Error()+"line 91")
+        //         return nil, err
+        // }
+        input := &amp;dynamodb.PutItemInput{
+                Item:      newItem,
+                TableName: aws.String("device"),
+        }
+        result, err := svc.PutItem(input)
+        if err != nil </span><span class="cov8" title="1">{
+                return nil, err
+        }</span>
+
+        <span class="cov8" title="1">return result, nil</span>
+}
+func CreateSvc()(svc dynamodbiface.DynamoDBAPI)<span class="cov0" title="0">{
+        config := &amp;aws.Config{
+                Region:   aws.String("us-east-1"),
+        }
+        session := session.Must(session.NewSession(config))
+        // Create DynamoDB client
+        return dynamodb.New(session)
+}</span>
+func HandleRequestProxy(svc dynamodbiface.DynamoDBAPI , request events.APIGatewayProxyRequest) (events.APIGatewayProxyResponse, error)<span class="cov8" title="1">{
+        
+        switch request.HTTPMethod </span>{
+        case "GET":<span class="cov8" title="1">
+                // call get func 
+                devices := Device{}
+                result, err := Get(svc , request)
+                if err != nil </span><span class="cov8" title="1">{
+                        // fmt.Println(err.Error()+":line86")
+                        ApiResponse := events.APIGatewayProxyResponse{Body: err.Error(), StatusCode: 502}
+                        return ApiResponse , err
+                }</span>
+                <span class="cov8" title="1">if result.Item == nil </span><span class="cov8" title="1">{
+                        // fmt.Println("no item found")
+                        ApiResponse := events.APIGatewayProxyResponse{Body: "No Item Found", StatusCode: 404}
+                        return ApiResponse , err
+                }</span>
+                <span class="cov8" title="1">dynamodbattribute.UnmarshalMap(result.Item, &amp;devices)
+                
+                // if err != nil {
+                //         // fmt.Println(err.Error())
+                //         ApiResponse := events.APIGatewayProxyResponse{Body: err.Error(), StatusCode: 502}
+                //         return ApiResponse, err
+                // }
+
+                responseBody , _ := json.Marshal(devices)
+                // if err != nil {
+                //         // fmt.Println(err.Error())
+                //         ApiResponse := events.APIGatewayProxyResponse{Body: err.Error(), StatusCode: 502}
+                //         return ApiResponse, err
+                // }
+                response := events.APIGatewayProxyResponse{Body: string(responseBody), StatusCode: 200}
+                return response, nil</span>
+
+        case "POST":<span class="cov8" title="1">
+                if request.Body == "" </span><span class="cov8" title="1">{
+                        err:= errors.New("empty body")
+                        fmt.Println(err.Error()+"line:102")
+                        ApiResponse := events.APIGatewayProxyResponse{Body: err.Error(), StatusCode: 400}
+                        return ApiResponse, err
+                }</span>
+                <span class="cov8" title="1">_, err := Post(svc , request)
+                if err != nil </span><span class="cov8" title="1">{
+                        fmt.Println(err.Error()+"line:138")
+                        ApiResponse := events.APIGatewayProxyResponse{Body: err.Error(), StatusCode: 400}
+                        return ApiResponse, err
+                }</span>
+
+                <span class="cov8" title="1">fmt.Printf("We have inserted a new item!\n")
+                response := events.APIGatewayProxyResponse{Body: "We have inserted a new item!", StatusCode: 201}
+                return response, nil</span>
+
+        default:<span class="cov8" title="1">
+                err := errors.New("method not allowed")
+                ApiResponse := events.APIGatewayProxyResponse{Body: "Method Not ACCEPTED", StatusCode: 502}
+                return ApiResponse, err</span>
+
+        }
+}
+func HandleRequest(request events.APIGatewayProxyRequest) (events.APIGatewayProxyResponse, error)<span class="cov0" title="0">{
+        // fmt.Println("in handel success")
+        svc := CreateSvc()
+        return HandleRequestProxy(svc,request)
+}</span>
+
+func main()  <span class="cov0" title="0">{
+        // fmt.Println("Run sucs!")
+        lambda.Start(HandleRequest)
+}</pre>
+		
+		</div>
+	</body>
+	<script>
+	(function() {
+		var files = document.getElementById('files');
+		var visible;
+		files.addEventListener('change', onChange, false);
+		function select(part) {
+			if (visible)
+				visible.style.display = 'none';
+			visible = document.getElementById(part);
+			if (!visible)
+				return;
+			files.value = part;
+			visible.style.display = 'block';
+			location.hash = part;
+		}
+		function onChange() {
+			select(files.value);
+			window.scrollTo(0, 0);
+		}
+		if (location.hash != "") {
+			select(location.hash.substr(1));
+		}
+		if (!visible) {
+			select("file0");
+		}
+	})();
+	</script>
+</html>

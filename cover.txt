@@ -1,0 +1,26 @@
+mode: set
+go-aws/main.go:23.114,31.16 5 1
+go-aws/main.go:36.2,43.16 3 1
+go-aws/main.go:47.2,47.20 1 1
+go-aws/main.go:31.16,34.3 2 0
+go-aws/main.go:43.16,45.3 1 1
+go-aws/main.go:49.114,55.16 6 1
+go-aws/main.go:59.2,64.16 3 1
+go-aws/main.go:68.2,68.20 1 1
+go-aws/main.go:55.16,58.3 2 0
+go-aws/main.go:64.16,66.3 1 1
+go-aws/main.go:70.98,80.28 5 1
+go-aws/main.go:81.13,85.17 3 1
+go-aws/main.go:90.3,90.25 1 0
+go-aws/main.go:95.3,97.17 2 0
+go-aws/main.go:103.3,104.17 2 0
+go-aws/main.go:109.3,110.23 2 0
+go-aws/main.go:112.14,115.17 2 1
+go-aws/main.go:121.3,123.23 3 0
+go-aws/main.go:125.10,128.26 3 0
+go-aws/main.go:85.17,89.4 3 1
+go-aws/main.go:90.25,94.4 3 0
+go-aws/main.go:97.17,101.4 3 0
+go-aws/main.go:104.17,108.4 3 0
+go-aws/main.go:115.17,119.4 3 1
+go-aws/main.go:133.14,136.2 2 0
