@@ -1,0 +1,312 @@
+{
+	"info": {
+		"_postman_id": "19d5e324-4829-491f-8bab-52bfe1c007e7",
+		"name": "aws-go",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "Get device By Id",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "{{url}}/:id",
+					"host": [
+						"{{url}}"
+					],
+					"path": [
+						":id"
+					],
+					"variable": [
+						{
+							"key": "id",
+							"value": "id1"
+						}
+					]
+				}
+			},
+			"response": [
+				{
+					"name": "Get device By Id",
+					"originalRequest": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{url}}/:id",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								":id"
+							],
+							"variable": [
+								{
+									"key": "id",
+									"value": "id1"
+								}
+							]
+						}
+					},
+					"status": "OK",
+					"code": 200,
+					"_postman_previewlanguage": "json",
+					"header": [
+						{
+							"key": "Date",
+							"value": "Tue, 13 Apr 2021 12:48:34 GMT"
+						},
+						{
+							"key": "Content-Type",
+							"value": "application/json"
+						},
+						{
+							"key": "Content-Length",
+							"value": "111"
+						},
+						{
+							"key": "Connection",
+							"value": "keep-alive"
+						},
+						{
+							"key": "x-amzn-RequestId",
+							"value": "6d86c139-071b-4f02-9dc0-67d6d7bca51a"
+						},
+						{
+							"key": "x-amz-apigw-id",
+							"value": "duPtdEVrIAMFVUg="
+						},
+						{
+							"key": "X-Amzn-Trace-Id",
+							"value": "Root=1-60759322-1377b1792e5feeb517e71811;Sampled=0"
+						}
+					],
+					"cookie": [],
+					"body": "{\n    \"id\": \"id1\",\n    \"deviceModel\": \"/devicemodels/id1\",\n    \"name\": \"Sensor\",\n    \"note\": \"Testing a sensor.\",\n    \"serial\": \"A020000102\"\n}"
+				},
+				{
+					"name": "Get device By Id",
+					"originalRequest": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{url}}/:id",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								":id"
+							],
+							"variable": [
+								{
+									"key": "id",
+									"value": "id2"
+								}
+							]
+						}
+					},
+					"status": "OK",
+					"code": 200,
+					"_postman_previewlanguage": "json",
+					"header": [
+						{
+							"key": "Date",
+							"value": "Tue, 13 Apr 2021 12:50:33 GMT"
+						},
+						{
+							"key": "Content-Type",
+							"value": "application/json"
+						},
+						{
+							"key": "Content-Length",
+							"value": "107"
+						},
+						{
+							"key": "Connection",
+							"value": "keep-alive"
+						},
+						{
+							"key": "x-amzn-RequestId",
+							"value": "0d742560-1129-48be-b8a5-4e5afc053ea6"
+						},
+						{
+							"key": "x-amz-apigw-id",
+							"value": "duQADG9FIAMFkTw="
+						},
+						{
+							"key": "X-Amzn-Trace-Id",
+							"value": "Root=1-60759399-1cafe93c0090f4af604aac03;Sampled=0"
+						}
+					],
+					"cookie": [],
+					"body": "{\n    \"id\": \"id2\",\n    \"deviceModel\": \"devicemodel2\",\n    \"name\": \"SensorX\",\n    \"note\": \"Testing a sensor.\",\n    \"serial\": \"A020000102\"\n}"
+				},
+				{
+					"name": "Get device By Id",
+					"originalRequest": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{url}}/:id",
+							"host": [
+								"{{url}}"
+							],
+							"path": [
+								":id"
+							],
+							"variable": [
+								{
+									"key": "id",
+									"value": "id55"
+								}
+							]
+						}
+					},
+					"status": "Not Found",
+					"code": 404,
+					"_postman_previewlanguage": "json",
+					"header": [
+						{
+							"key": "Date",
+							"value": "Tue, 13 Apr 2021 12:50:57 GMT"
+						},
+						{
+							"key": "Content-Type",
+							"value": "application/json"
+						},
+						{
+							"key": "Content-Length",
+							"value": "13"
+						},
+						{
+							"key": "Connection",
+							"value": "keep-alive"
+						},
+						{
+							"key": "x-amzn-RequestId",
+							"value": "6a668851-deeb-4e97-9b86-76a4bb8fac1c"
+						},
+						{
+							"key": "x-amz-apigw-id",
+							"value": "duQDsEZBoAMF82w="
+						},
+						{
+							"key": "X-Amzn-Trace-Id",
+							"value": "Root=1-607593b1-5114a2074d6531f11b3a604a;Sampled=0"
+						}
+					],
+					"cookie": [],
+					"body": "No Item Found"
+				}
+			]
+		},
+		{
+			"name": "Add device",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"id\": \"id3\",\r\n    \"deviceModel\": \"model3\",\r\n    \"name\": \"Sensor3\",\r\n    \"note\": \"Testing a sensor.\",\r\n    \"serial\": \"C020000102\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{url}}",
+					"host": [
+						"{{url}}"
+					]
+				}
+			},
+			"response": [
+				{
+					"name": "New Request",
+					"originalRequest": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"id\": \"id3\",\r\n    \"deviceModel\": \"model3\",\r\n    \"name\": \"Sensor3\",\r\n    \"note\": \"Testing a sensor.\",\r\n    \"serial\": \"C020000102\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{url}}",
+							"host": [
+								"{{url}}"
+							]
+						}
+					},
+					"status": "Created",
+					"code": 201,
+					"_postman_previewlanguage": "json",
+					"header": [
+						{
+							"key": "Date",
+							"value": "Tue, 13 Apr 2021 12:54:52 GMT"
+						},
+						{
+							"key": "Content-Type",
+							"value": "application/json"
+						},
+						{
+							"key": "Content-Length",
+							"value": "28"
+						},
+						{
+							"key": "Connection",
+							"value": "keep-alive"
+						},
+						{
+							"key": "x-amzn-RequestId",
+							"value": "1708f877-6240-4f33-b6ef-95e5d47175c9"
+						},
+						{
+							"key": "x-amz-apigw-id",
+							"value": "duQofHpBoAMFy6w="
+						},
+						{
+							"key": "X-Amzn-Trace-Id",
+							"value": "Root=1-6075949c-04838b32067397286fdf60c6;Sampled=0"
+						}
+					],
+					"cookie": [],
+					"body": "We have inserted a new item!"
+				}
+			]
+		}
+	],
+	"event": [
+		{
+			"listen": "prerequest",
+			"script": {
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
+		},
+		{
+			"listen": "test",
+			"script": {
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
+		}
+	],
+	"variable": [
+		{
+			"id": "5c485ed9-8afd-43f2-ae58-acf7763bfa8c",
+			"key": "url",
+			"value": "{{url}}"
+		}
+	]
+}
